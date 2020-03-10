@@ -3,7 +3,10 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var server = require('http').createServer(app);
-var io = require('socket.io')(server);
+var io = require('socket.io')(server,{
+  serveClient: false,
+  wsEngine: 'ws' // uws is not supported since it is a native module
+});
 var port = process.env.PORT || 3000;
 
 server.listen(port, () => {
