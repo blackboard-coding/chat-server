@@ -7,10 +7,10 @@
   "author": "Nutthapat Piasangka <n.devs260340@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/server.js",
-    "build": "webpack --config ./support/webpack.config.js"
+    "start": "node index.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "socket.io": "^2.3.0"
   },

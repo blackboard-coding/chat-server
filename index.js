@@ -3,11 +3,11 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var server = require('http').createServer(app);
-var io = require('socket.io')(server,{
-  serveClient: false,
-  wsEngine: 'ws' // uws is not supported since it is a native module
-});
-var port = process.env.PORT || 3000;
+var io = require('socket.io')(server);
+const cors = require("cors");
+
+app.use(cors());
+var port = process.env.PORT || 4000;
 
 server.listen(port, () => {
   console.log('Server listening at port %d', port);
@@ -30,7 +30,12 @@ io.on('connection', (socket) => {
       username: socket.username,
       message: data
     });
+
+    // socket.emit('image', { image: true, buffer: buf.toString('base64') });
+    // socket.emit('video', { video: true, buffer: buf.toString('base64') });
   });
+
+
 
   // when the client emits 'add user', this listens and executes
   socket.on('add user', (username) => {
@@ -63,6 +68,8 @@ io.on('connection', (socket) => {
       username: socket.username
     });
   });
+
+
 
   // when the user disconnects.. perform this
   socket.on('disconnect', () => {
