@@ -26,11 +26,13 @@ io.on('connection', (socket) => {
   // when the client emits 'new message', this listens and executes
   socket.on('new message', (data) => {
     // we tell the client to execute 'new message'
+    
+
     socket.broadcast.emit('new message', {
       username: socket.username,
       message: data
     });
-
+    console.log(`${socket.username}: ${data}`);
     // socket.emit('image', { image: true, buffer: buf.toString('base64') });
     // socket.emit('video', { video: true, buffer: buf.toString('base64') });
   });
@@ -46,7 +48,9 @@ io.on('connection', (socket) => {
     ++numUsers;
     addedUser = true;
     socket.emit('login', {
-      numUsers: numUsers
+      numUsers: numUsers,
+      username: socket.username,
+      status: addedUser
     });
     // echo globally (all clients) that a person has connected
     socket.broadcast.emit('user joined', {
