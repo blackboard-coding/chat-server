@@ -1,4 +1,4 @@
 # chat-server
 socket.io
 
-api: https://blackboard-chat-test.herokuapp.com/
+api: https://chatty-serve.herokuapp.com/
